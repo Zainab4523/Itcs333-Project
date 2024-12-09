@@ -84,7 +84,13 @@ $result_timeslots = mysqli_stmt_get_result($stmt);
         <?php
         if ($result_timeslots && mysqli_num_rows($result_timeslots) > 0) {
             while ($timeslot = mysqli_fetch_assoc($result_timeslots)) {
-                echo '<li>' . $timeslot['start_time'] . ' - ' . $timeslot['end_time'] . '</li>';
+                echo '<li>' . $timeslot['start_time'] . ' - ' . $timeslot['end_time'] . ' ';
+                echo '<form action="book_room.php" method="POST" style="display:inline;">';
+                echo '<input type="hidden" name="room_id" value="' . $room['room_id'] . '">';
+                echo '<input type="hidden" name="timeslot_id" value="' . $timeslot['timeslot_id'] . '">';
+                echo '<button type="submit">Book Now</button>';
+                echo '</form>';
+                echo '</li>';
             }
         } else {
             echo '<p>No available timeslots.</p>';
